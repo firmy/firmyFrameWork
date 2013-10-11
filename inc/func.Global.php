@@ -17,8 +17,8 @@ if(!defined('IN_SYS')) {
 * @desc 自动加载类文件
 * @return void
 */
-function __autoload($class="") {
-	$class_file = ROOT_DIR.'inc/class.' . $class . '.php';
+function __autoload($class) {
+	$class_file = ROOT_DIR.'inc/firmy.'. $class.'.php';
 	if(class_exists($class_file,false)) {
 		return;
 	} elseif (!is_readable($class_file)) {
@@ -51,6 +51,10 @@ function load_app($appName='', $method = '') {
 	load($fileName);
 	$object = new $appName;
 	$object->$method();
+}
+
+function get($key){
+	return $_GET[$key];
 }
 
 /**
@@ -313,13 +317,22 @@ function logs($msg,$type=''){
 	}
 
 	
-	function getUserIdFromHex($user_hex){
-		$user_id = "";
-		if($user_hex){
-			$user_hex = base64_decode($user_hex);
-			list($_COOKIE['member_id'], $_COOKIE['pass_hex'], $_COOKIE['member_login']) = explode('|', $user_hex);
-			$user_id = u_get_user_id();
+	
+	
+	function takeTpl($tpl,$array = array()){
+		require ROOT_DIR.'/smarty/libs/Smarty.class.php';
+		$smarty = new Smarty;
+		//$smarty->force_compile = true;
+		$smarty->debugging = true;
+		$smarty->caching = true;
+		$smarty->cache_lifetime = 120;
+		if(!empty($array) && is_array($array)){
+			foreach ($array as $k=>$v)
+			$smarty->assign($k,$v);
 		}
-		return $user_id;
+		$smarty->display($tpl.".tpl");
+		
 	}
+	
+	
 ?>

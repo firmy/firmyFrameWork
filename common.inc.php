@@ -13,6 +13,7 @@
  include ROOT_DIR.'conf/sys.conf.php';
  include ROOT_DIR.'conf/cache.conf.php';
  include ROOT_DIR.'conf/comm.conf.php';
+ //require ROOT_DIR.'inc/smarty/libs/Smarty.class.php';
  //调试
  if(DEBUG) {
  	if (isset($_SERVER['HTTP_CLIENT_IP'])) {
