@@ -22,7 +22,7 @@ Core::$configs ['define'] = array ();
 // $configs
 /**
  * ******************************************
- * database servers configure
+ * db配置，可以添加多个db
  * *******************************************
  */
 Core::$configs ['db'] ['event'] = array (

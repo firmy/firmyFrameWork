@@ -1,16 +1,15 @@
 <?php
 class firmy {
 	function __construct() {
-		echo "nice feel";
+		Core::InitDb ();
 	}
 	
 	
 	function test() {
-		$dbcfg = $_GET['db'];
-		Core::InitDb ();
-		$db = Core::$db [$dbcfg];
+		$db = Core::$db ['event'];
 		$sql = "select * from firmy_assets limit 4";
-		$r = $db->dataArray ( $sql );
+		$r = $db->fetchOne ( $sql );
+		print_r($r);
 	}
 }
 

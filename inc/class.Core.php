@@ -136,21 +136,21 @@ class Core {
 	 * @return vid
 	 *
 	 */
-	public static function InitDb($keys=array()) {
+	public static function InitDb($db="") {
 		$p = Core::$configs['db'];
-		if(empty($keys)) {
+		if(empty($db)) {
 			foreach($p as $k=>&$v) {
 		 		if(isset(Core::$db[$k])) continue;
 		 		Core::$db[$k] = new Db( $v, array('_charset'=>$v['_charset']) );
 		 	}
-		}else if(is_array($keys)) {
-			foreach($keys as $v) {
+		}else if(is_array($db)) {
+			foreach($db as $v) {
 		 		if(isset(Core::$db[$v])) continue;
 		 		Core::$db[$v] = new Db( $p[$v], array('_charset'=>$p[$v]['_charset']) );
 		 	}
-		}else if(is_string($keys) && !isset(Core::$db[$keys])) {
-			if(!isset($p[$keys])) return;
-			Core::$db[$keys] = new Db( $p[$keys], array('_charset'=>$p[$keys]['_charset']) );
+		}else if(is_string($db) && !isset(Core::$db[$db])) {
+			if(!isset($p[$db])) return;
+			Core::$db[$db] = new Db( $p[$db], array('_charset'=>$p[$db]['_charset']) );
 		}
 	}
 	/**

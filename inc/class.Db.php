@@ -179,7 +179,6 @@ class Db{
 		return $this->_insertId;
 	}
 	
-	//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 	//    ======================================
 	// 函数: update()
 	// 功能: 数椐更新
@@ -292,9 +291,28 @@ class Db{
 		return $this->_getDataArray($sql, $bind);
 	}
 	
+	/**
+	 * @desc 获取所有的数据
+	 * @param string $sql
+	 * @param string $bind
+	 * @param unknown $cache
+	 * @return Ambigous <multitype:, boolean>
+	 */
 	public function fetchAll($sql = '', $bind = '', $cache = -1) {
 		return $this->dataArray($sql, $bind,$cache);
 	}
+	/**
+	 * @desc 获取第一条记录
+	 * @param string $sql
+	 * @param string $bind
+	 * @param unknown $cache
+	 * @return Ambigous <>
+	 */
+	public function fetchOne($sql = '', $bind = '', $cache = -1) {
+		$rs = $this->dataArray($sql, $bind,$cache);
+		return $rs[0];
+	}
+	
 	public function fetchAssoc($sql = null, $bind = null, $cache = -1) {
 		$result = $this->dataArray($sql, $bind,$cache);
 		$data = array();
