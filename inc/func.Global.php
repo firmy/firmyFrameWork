@@ -17,12 +17,12 @@ if(!defined('IN_SYS')) {
 * @desc 自动加载类文件
 * @return void
 */
-function __autoload($class) {
+function __autoload($class="") {
 	$class_file = ROOT_DIR.'inc/class.' . $class . '.php';
 	if(class_exists($class_file,false)) {
 		return;
 	} elseif (!is_readable($class_file)) {
-		throw new JException("unable to read class file");
+		echo "unable to read class file";
 	} else {
 		load($class_file);
 	}
@@ -47,7 +47,8 @@ function load_app($appName='', $method = '') {
 	$appName = $appName ? $appName : $_GET[ACTION];
 	$appName = ucfirst($appName);
 	$method = $method ? $method : $_GET[DO_METHOD];
-	load(APP_DIR.'app.'.$appName.'.php');
+	$fileName = APP_DIR.'app.'.$appName.'.php';
+	load($fileName);
 	$object = new $appName;
 	$object->$method();
 }

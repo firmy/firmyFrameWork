@@ -11,7 +11,6 @@ class firmy {
 		$db = Core::$db [$dbcfg];
 		$sql = "select * from firmy_assets limit 4";
 		$r = $db->dataArray ( $sql );
-		print_r($r);
 	}
 }
 
